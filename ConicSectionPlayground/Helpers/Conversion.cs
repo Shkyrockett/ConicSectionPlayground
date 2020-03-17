@@ -9,7 +9,6 @@
 // <remarks></remarks>
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using static ConicSectionPlayground.Mathematics;
@@ -22,6 +21,7 @@ namespace ConicSectionPlayground
     /// </summary>
     public static class Conversion
     {
+        #region Trig
         /// <summary>
         /// Convert Degrees to Radians.
         /// </summary>
@@ -37,7 +37,9 @@ namespace ConicSectionPlayground
         /// <returns>Angle in Degrees.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double RadiansToDegrees(this double radians) => radians * Degree;
+        #endregion
 
+        #region Cast Conversion
         /// <summary>
         /// Converts <see cref="ValueTuple" /> to <see cref="PointF" />.
         /// </summary>
@@ -45,10 +47,12 @@ namespace ConicSectionPlayground
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static PointF ToPointF(this (double X, double Y) tuple) => new PointF((float)tuple.X, (float)tuple.Y);
+        #endregion
 
         /// <summary>
         /// Identifies the type of the conic section.
         /// https://math.libretexts.org/Bookshelves/Precalculus/Book%3A_Precalculus_(OpenStax)/10%3A_Analytic_Geometry/10.4%3A_Rotation_of_Axes
+        /// https://www.shelovesmath.com/precal/conics/
         /// </summary>
         /// <param name="a">a.</param>
         /// <param name="b">The b.</param>
@@ -62,7 +66,6 @@ namespace ConicSectionPlayground
         {
             _ = d;
             _ = e;
-            _ = f;
             const double epsilon = 0.00001d;
 
             // Calculate the determinant.
@@ -74,14 +77,15 @@ namespace ConicSectionPlayground
             }
             else if (determinant < 0d)
             {
-                return /*f == 0 ? ConicType.Point :*/ (Abs(a) < epsilon) && (Abs(b) < epsilon) ? ConicSectionType.Circle : ConicSectionType.Ellipse;
+                return f == 0 ? ConicSectionType.Point : (Abs(a) < epsilon) && (Abs(b) < epsilon) ? ConicSectionType.Circle : ConicSectionType.Ellipse;
             }
             else
             {
-                return Abs(a + c) < epsilon ? Sign(a) != Sign(b) ? ConicSectionType.IntersectingLines : ConicSectionType.RectangularHyperbola : ConicSectionType.Hyperbola;
+                return Abs(a + c) < epsilon ? Sign(a) != Sign(b) ? ConicSectionType.CrossingLines : ConicSectionType.RectangularHyperbola : ConicSectionType.Hyperbola;
             }
         }
 
+        #region Conic Section
         /// <summary>
         /// Point to conic section.
         /// </summary>
@@ -142,6 +146,7 @@ namespace ConicSectionPlayground
                 e: y1 + dY,
                 f: 0d);
         }
+        #endregion
 
         /// <summary>
         /// Parabolas to conic section.
@@ -857,125 +862,5 @@ namespace ConicSectionPlayground
         /// <returns>Returns Quadratic Bézier curve from a cubic curve.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (double aX, double aY, double bX, double bY, double cX, double cY, double dX, double dY) QuadraticBezierToCubicBezier(double aX, double aY, double bX, double bY, double cX, double cY) => (aX, aY, aX + (TwoThirds * (bX - aX)), aY + (TwoThirds * (bY - aY)), cX + (TwoThirds * (bX - cX)), cY + (TwoThirds * (bY - cY)), cX, cY);
-
-        /// <summary>
-        /// Get the points of the Cartesian extremes of a circle.
-        /// </summary>
-        /// <param name="x">The x-coordinate of the center of the circle.</param>
-        /// <param name="y">The y-coordinate of the center of the circle.</param>
-        /// <param name="r">The r.</param>
-        /// <returns>
-        /// Returns the points of extreme for a circle.
-        /// </returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static List<(double X, double Y)> CircleExtremePoints(double x, double y, double r) => new List<(double X, double Y)>
-            {
-                (X: x, Y: y - r),
-                (X: x - r, Y: y),
-                (X: x, Y: y + r),
-                (X: x + r, Y: y),
-            };
-
-        /// <summary>
-        /// Get the points of the Cartesian extremes of a rotated ellipse.
-        /// </summary>
-        /// <param name="x">The x-coordinate of the center of the ellipse.</param>
-        /// <param name="y">The y-coordinate of the center of the ellipse.</param>
-        /// <param name="rX">The horizontal radius of the ellipse.</param>
-        /// <param name="rY">The vertical radius of the ellipse.</param>
-        /// <returns>
-        /// Returns the points of extreme for an ellipse.
-        /// </returns>
-        /// <acknowledgment>
-        /// Based roughly on the principles found at:
-        /// http://stackoverflow.com/questions/87734/how-do-you-calculate-the-axis-aligned-bounding-box-of-an-ellipse
-        /// </acknowledgment>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static List<(double X, double Y)> OrthogonalEllipseExtremePoints(double x, double y, double rX, double rY)
-        {
-            if (rX == rY)
-            {
-                return CircleExtremePoints(x, y, rX);
-            }
-
-            return new List<(double X, double Y)>
-            {
-                (X: x, Y: y - rY),
-                (X: x - rX, Y: y),
-                (X: x, Y: y + rY),
-                (X: x + rX, Y: y),
-            };
-        }
-
-        /// <summary>
-        /// Get the points of the Cartesian extremes of a rotated ellipse.
-        /// </summary>
-        /// <param name="x">The x-coordinate of the center of the ellipse.</param>
-        /// <param name="y">The y-coordinate of the center of the ellipse.</param>
-        /// <param name="rX">The horizontal radius of the ellipse.</param>
-        /// <param name="rY">The vertical radius of the ellipse.</param>
-        /// <param name="angle">The angle of orientation of the ellipse.</param>
-        /// <returns>Returns the points of extreme for an ellipse.</returns>
-        /// <acknowledgment>
-        /// Based roughly on the principles found at:
-        /// http://stackoverflow.com/questions/87734/how-do-you-calculate-the-axis-aligned-bounding-box-of-an-ellipse
-        /// </acknowledgment>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static List<(double X, double Y)> EllipseExtremePoints(double x, double y, double rX, double rY, double angle) => EllipseExtremePoints(x, y, rX, rY, Cos(angle), Sin(angle));
-
-        /// <summary>
-        /// Get the points of the Cartesian extremes of a rotated ellipse.
-        /// </summary>
-        /// <param name="x">The x-coordinate of the center of the ellipse.</param>
-        /// <param name="y">The y-coordinate of the center of the ellipse.</param>
-        /// <param name="rX">The horizontal radius of the ellipse.</param>
-        /// <param name="rY">The vertical radius of the ellipse.</param>
-        /// <param name="cosAngle">The cosine component of the angle of orientation of the ellipse.</param>
-        /// <param name="sinAngle">The sine component of the angle of orientation of the ellipse.</param>
-        /// <returns>Returns the points of extreme for an ellipse.</returns>
-        /// <acknowledgment>
-        /// Based roughly on the principles found at:
-        /// http://stackoverflow.com/questions/87734/how-do-you-calculate-the-axis-aligned-bounding-box-of-an-ellipse
-        /// </acknowledgment>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static List<(double X, double Y)> EllipseExtremePoints(double x, double y, double rX, double rY, double cosAngle, double sinAngle)
-        {
-            if (rX == rY)
-            {
-                return CircleExtremePoints(x, y, rX);
-            }
-
-            if (cosAngle == Cos0 && sinAngle == Sin0)
-            {
-                return OrthogonalEllipseExtremePoints(x, y, rX, rY);
-            }
-
-            // Fix imprecise handling of Cos(PI/2) which breaks ellipses at right angles to each other.
-            if (sinAngle == 1d || sinAngle == -1d)
-            {
-                cosAngle = 0d;
-            }
-
-            // Calculate the radii of the angle of rotation.
-            var a = rX * cosAngle;
-            var b = rY * sinAngle;
-            var c = rX * sinAngle;
-            var d = rY * cosAngle;
-
-            // Find the angles of the Cartesian extremes.
-            var a1 = Atan2(-b, a);
-            var a2 = Atan2(b, -a); // + PI; // sin(t + pi) = -sin(t); cos(t + pi)=-cos(t)
-            var a3 = Atan2(d, c);
-            var a4 = Atan2(-d, -c); // + PI; // sin(t + pi) = -sin(t); cos(t + pi)=-cos(t)
-
-            // Return the points of Cartesian extreme of the rotated ellipse.
-            return new List<(double X, double Y)>
-            {
-                Interpolation.Ellipse(a1, x, y, rX, rY, cosAngle, sinAngle),
-                Interpolation.Ellipse(a2, x, y, rX, rY, cosAngle, sinAngle),
-                Interpolation.Ellipse(a3, x, y, rX, rY, cosAngle, sinAngle),
-                Interpolation.Ellipse(a4, x, y, rX, rY, cosAngle, sinAngle)
-            };
-        }
     }
 }

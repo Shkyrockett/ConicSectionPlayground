@@ -32,6 +32,11 @@ namespace ConicSectionPlayground
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DrawConicSection(Graphics gr, Pen pen, Point offset, float scale, ConicSection conicSection)
         {
+            if (conicSection.Type == ConicSectionType.Point)
+            {
+                //DrawPoint(gr, pen,offset,scale, ());
+            }
+
             (var a, var b, var c, var d, var e, var f) = conicSection;
 
             // Get the X coordinate bounds.
@@ -168,6 +173,29 @@ namespace ConicSectionPlayground
             {
                 gr.DrawLines(pen, rn_points.ToArray());
             }
+
+            gr.ResetTransform();
+            gr.Transform = old;
+        }
+
+        /// <summary>
+        /// Draws the point.
+        /// </summary>
+        /// <param name="gr">The gr.</param>
+        /// <param name="pen">The pen.</param>
+        /// <param name="offset">The offset.</param>
+        /// <param name="scale">The scale.</param>
+        /// <param name="point">The point.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void DrawPoint(Graphics gr, Pen pen, Point offset, float scale, (double X, double Y) point)
+        {
+            const double r = 4;
+            var old = gr.Transform;
+            gr.ResetTransform();
+            gr.ScaleTransform(scale, scale);
+            gr.TranslateTransform(offset.X, offset.Y);
+
+            gr.DrawEllipse(pen, (float)(point.X - r), (float)(point.Y - r), (float)(2d * r), (float)(2d * r));
 
             gr.ResetTransform();
             gr.Transform = old;

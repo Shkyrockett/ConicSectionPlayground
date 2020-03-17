@@ -8,7 +8,10 @@
 // <summary></summary>
 // <remarks></remarks>
 
+using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using static ConicSectionPlayground.Mathematics;
 using static System.Math;
 
 namespace ConicSectionPlayground
@@ -153,5 +156,133 @@ namespace ConicSectionPlayground
                 X: cX + ((i * cosAngle) + (j * sinAngle)),
                 Y: cY + ((i * sinAngle) - (j * cosAngle)));
         }
+
+        #region Ellipse Extremes
+        /// <summary>
+        /// Get the points of the Cartesian extremes of a circle.
+        /// </summary>
+        /// <param name="x">The x-coordinate of the center of the circle.</param>
+        /// <param name="y">The y-coordinate of the center of the circle.</param>
+        /// <param name="r">The r.</param>
+        /// <returns>
+        /// Returns the points of extreme for a circle.
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe Span<(double X, double Y)> CircleExtremePoints(double x, double y, double r)
+        {
+            Span<(double X, double Y)> points = stackalloc (double X, double Y)[4]
+            {
+                (X: x, Y: y - r),
+                (X: x - r, Y: y),
+                (X: x, Y: y + r),
+                (X: x + r, Y: y),
+            };
+            return points.ToArray();
+        }
+
+        /// <summary>
+        /// Get the points of the Cartesian extremes of a rotated ellipse.
+        /// </summary>
+        /// <param name="x">The x-coordinate of the center of the ellipse.</param>
+        /// <param name="y">The y-coordinate of the center of the ellipse.</param>
+        /// <param name="rX">The horizontal radius of the ellipse.</param>
+        /// <param name="rY">The vertical radius of the ellipse.</param>
+        /// <returns>
+        /// Returns the points of extreme for an ellipse.
+        /// </returns>
+        /// <acknowledgment>
+        /// Based roughly on the principles found at:
+        /// http://stackoverflow.com/questions/87734/how-do-you-calculate-the-axis-aligned-bounding-box-of-an-ellipse
+        /// </acknowledgment>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Span<(double X, double Y)> OrthogonalEllipseExtremePoints(double x, double y, double rX, double rY)
+        {
+            if (rX == rY)
+            {
+                return CircleExtremePoints(x, y, rX);
+            }
+
+            Span<(double X, double Y)> points = stackalloc (double X, double Y)[4]
+            {
+                (X: x, Y: y - rY),
+                (X: x - rX, Y: y),
+                (X: x, Y: y + rY),
+                (X: x + rX, Y: y),
+            };
+            return points.ToArray();
+        }
+
+        /// <summary>
+        /// Get the points of the Cartesian extremes of a rotated ellipse.
+        /// </summary>
+        /// <param name="x">The x-coordinate of the center of the ellipse.</param>
+        /// <param name="y">The y-coordinate of the center of the ellipse.</param>
+        /// <param name="rX">The horizontal radius of the ellipse.</param>
+        /// <param name="rY">The vertical radius of the ellipse.</param>
+        /// <param name="angle">The angle of orientation of the ellipse.</param>
+        /// <returns>Returns the points of extreme for an ellipse.</returns>
+        /// <acknowledgment>
+        /// Based roughly on the principles found at:
+        /// http://stackoverflow.com/questions/87734/how-do-you-calculate-the-axis-aligned-bounding-box-of-an-ellipse
+        /// </acknowledgment>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Span<(double X, double Y)> EllipseExtremePoints(double x, double y, double rX, double rY, double angle) => EllipseExtremePoints(x, y, rX, rY, Cos(angle), Sin(angle));
+
+        /// <summary>
+        /// Get the points of the Cartesian extremes of a rotated ellipse.
+        /// </summary>
+        /// <param name="x">The x-coordinate of the center of the ellipse.</param>
+        /// <param name="y">The y-coordinate of the center of the ellipse.</param>
+        /// <param name="rX">The horizontal radius of the ellipse.</param>
+        /// <param name="rY">The vertical radius of the ellipse.</param>
+        /// <param name="cosAngle">The cosine component of the angle of orientation of the ellipse.</param>
+        /// <param name="sinAngle">The sine component of the angle of orientation of the ellipse.</param>
+        /// <returns>Returns the points of extreme for an ellipse.</returns>
+        /// <acknowledgment>
+        /// Based roughly on the principles found at:
+        /// http://stackoverflow.com/questions/87734/how-do-you-calculate-the-axis-aligned-bounding-box-of-an-ellipse
+        /// </acknowledgment>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Span<(double X, double Y)> EllipseExtremePoints(double x, double y, double rX, double rY, double cosAngle, double sinAngle)
+        {
+            if (rX == rY)
+            {
+                return CircleExtremePoints(x, y, rX);
+            }
+
+            if (cosAngle == Cos0 && sinAngle == Sin0)
+            {
+                return OrthogonalEllipseExtremePoints(x, y, rX, rY);
+            }
+
+            // Fix imprecise handling of Cos(PI/2) which breaks ellipses at right angles to each other.
+            if (sinAngle == 1d || sinAngle == -1d)
+            {
+                cosAngle = 0d;
+            }
+
+            // Calculate the radii of the angle of rotation.
+            var a = rX * cosAngle;
+            var b = rY * sinAngle;
+            var c = rX * sinAngle;
+            var d = rY * cosAngle;
+
+            // Find the angles of the Cartesian extremes.
+            var a1 = Atan2(-b, a);
+            var a2 = Atan2(b, -a); // + PI; // sin(t + pi) = -sin(t); cos(t + pi)=-cos(t)
+            var a3 = Atan2(d, c);
+            var a4 = Atan2(-d, -c); // + PI; // sin(t + pi) = -sin(t); cos(t + pi)=-cos(t)
+
+            // Return the points of Cartesian extreme of the rotated ellipse.
+            Span<(double X, double Y)> points = stackalloc (double X, double Y)[4]
+            {
+                Ellipse(a1, x, y, rX, rY, cosAngle, sinAngle),
+                Ellipse(a2, x, y, rX, rY, cosAngle, sinAngle),
+                Ellipse(a3, x, y, rX, rY, cosAngle, sinAngle),
+                Ellipse(a4, x, y, rX, rY, cosAngle, sinAngle)
+            };
+            return points.ToArray();
+        }
+        #endregion
     }
 }

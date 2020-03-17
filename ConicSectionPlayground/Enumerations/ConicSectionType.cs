@@ -13,6 +13,8 @@ namespace ConicSectionPlayground
     /// <summary>
     /// Enumeration of types of Conics.
     /// https://www.ck12.org/book/CK-12-College-Precalculus/section/11.7/
+    /// https://en.wikipedia.org/wiki/Degenerate_conic
+    /// http://www.math.com/tables/algebra/conics.htm
     /// </summary>
     public enum ConicSectionType
     {
@@ -49,7 +51,7 @@ namespace ConicSectionPlayground
         /// <summary>
         /// The conic is a pair of intersecting lines.
         /// </summary>
-        IntersectingLines,
+        CrossingLines,
 
         /// <summary>
         /// The conic is a rectangular hyperbola.

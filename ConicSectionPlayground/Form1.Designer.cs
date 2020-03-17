@@ -46,6 +46,7 @@ namespace ConicSectionPlayground
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -73,8 +74,8 @@ namespace ConicSectionPlayground
             this.picCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picCanvas.Location = new System.Drawing.Point(0, 0);
             this.picCanvas.Name = "picCanvas";
-            this.picCanvas.Size = new System.Drawing.Size(537, 537);
-            this.picCanvas.TabIndex = 0;
+            this.picCanvas.Size = new System.Drawing.Size(529, 537);
+            this.picCanvas.TabIndex = 2;
             this.picCanvas.TabStop = false;
             this.picCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.PicCanvas_Paint);
             this.picCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PicCanvas_MouseDown);
@@ -94,9 +95,10 @@ namespace ConicSectionPlayground
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer1.Location = new System.Drawing.Point(12, 12);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -108,8 +110,9 @@ namespace ConicSectionPlayground
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGrid1);
             this.splitContainer1.Size = new System.Drawing.Size(760, 537);
-            this.splitContainer1.SplitterDistance = 537;
-            this.splitContainer1.TabIndex = 2;
+            this.splitContainer1.SplitterDistance = 529;
+            this.splitContainer1.SplitterWidth = 12;
+            this.splitContainer1.TabIndex = 0;
             // 
             // Form1
             // 
