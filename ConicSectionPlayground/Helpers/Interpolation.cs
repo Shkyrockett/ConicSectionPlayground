@@ -9,7 +9,6 @@
 // <remarks></remarks>
 
 using System;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using static ConicSectionPlayground.Mathematics;
 using static System.Math;
