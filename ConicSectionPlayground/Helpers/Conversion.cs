@@ -10,6 +10,7 @@
 
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Runtime.CompilerServices;
 using static ConicSectionPlayground.Mathematics;
 using static System.Math;
@@ -26,7 +27,9 @@ namespace ConicSectionPlayground
         /// Convert Degrees to Radians.
         /// </summary>
         /// <param name="degrees">Angle in Degrees.</param>
-        /// <returns>Angle in Radians.</returns>
+        /// <returns>
+        /// Angle in Radians.
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double DegreesToRadians(this double degrees) => degrees * Radian;
 
@@ -34,7 +37,9 @@ namespace ConicSectionPlayground
         /// Convert Radians to Degrees.
         /// </summary>
         /// <param name="radians">Angle in Radians.</param>
-        /// <returns>Angle in Degrees.</returns>
+        /// <returns>
+        /// Angle in Degrees.
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double RadiansToDegrees(this double radians) => radians * Degree;
         #endregion
@@ -93,15 +98,12 @@ namespace ConicSectionPlayground
         /// <param name="k">The k.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ConicSection PointToUnitConicSection(double h, double k)
-        {
-            return new ConicSection(
+        public static ConicSection PointToUnitConicSection(double h, double k) => new ConicSection(
                 a: 1d,
                 b: 1d,
                 c: 0d, -2d * h,
                 e: -2d * k,
                 f: (h * h) + (k * k) - 1d);
-        }
 
         /// <summary>
         /// Lines to conic section.
@@ -146,7 +148,6 @@ namespace ConicSectionPlayground
                 e: y1 + dY,
                 f: 0d);
         }
-        #endregion
 
         /// <summary>
         /// Parabolas to conic section.
@@ -170,7 +171,7 @@ namespace ConicSectionPlayground
         {
             // ToDo: Fix. This does not work as expected.
             var b = -2d * a * h;
-            return new ConicSection(b, 0d, a, (b * b / (4d * a)), k, 1d);
+            return new ConicSection(b, 0d, a, b * b / (4d * a), k, 1d);
         }
 
         /// <summary>
@@ -205,17 +206,15 @@ namespace ConicSectionPlayground
         /// http://csharphelper.com/blog/2014/11/see-where-a-parabola-and-hyperbola-intersect-in-c/
         /// </acknowledgment>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ConicSection ParabolaToConicSection2(double dX, double dY, double sX, double sY)
-        {
+        public static ConicSection ParabolaToConicSection2(double dX, double dY, double sX, double sY) =>
             // ToDo: Figure out what this is doing.
-            return new ConicSection(
+            new ConicSection(
                 a: 0,
                 b: 0,
                 c: -sY * sY,
                 d: sX,
                 e: 2d * sY * dY,
                 f: (-sX * dX) - (dY * dY));
-        }
 
         /// <summary>
         /// Finds the conic section.
@@ -403,10 +402,10 @@ namespace ConicSectionPlayground
         /// <summary>
         /// Converts the ellipse to conic section sextic.
         /// </summary>
-        /// <param name="h">The h.</param>
-        /// <param name="k">The k.</param>
         /// <param name="a">a.</param>
         /// <param name="b">The b.</param>
+        /// <param name="h">The h.</param>
+        /// <param name="k">The k.</param>
         /// <param name="angle">The theta.</param>
         /// <returns></returns>
         /// <acknowledgment>
@@ -530,6 +529,7 @@ namespace ConicSectionPlayground
         /// <param name="cos">The cos.</param>
         /// <param name="sin">The sin.</param>
         /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ConicSection HyperbolaToConicSection(double rX, double rY, double h, double k, double cos, double sin)
         {
@@ -563,6 +563,33 @@ namespace ConicSectionPlayground
             var scale = 1d / min;
             return new ConicSection(conicSection.A *= scale, conicSection.B *= scale, conicSection.C *= scale, conicSection.D *= scale, conicSection.E *= scale, conicSection.F *= scale);
         }
+
+        /// <summary>
+        /// Converts a conic section to matrix form.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <param name="c">The c.</param>
+        /// <param name="d">The d.</param>
+        /// <param name="e">The e.</param>
+        /// <param name="f">The f.</param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe double[,] ConicSectionToMatrix(double a, double b, double c, double d, double e, double f) => new  double[3,3] { { a, b * 0.5d, d * 0.5d }, { b * 0.5d, c, e * 0.5d }, { d * 0.5d, e * 0.5d, f } };
+
+        /// <summary>
+        /// Converts a matrix form of a Conic Section to Standard Conic Section form.
+        /// </summary>
+        /// <param name="matrix">The matrix.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (double a, double b, double c, double d, double e, double f) MatrixToConicSection(double[,] matrix)
+        {
+            if (matrix.GetLength(0) != 3 || matrix.GetLength(1) != 3) throw new Exception();
+            return (matrix[0, 0], matrix[0, 1] * 2d, matrix[1, 1], matrix[0, 2] * 2d, matrix[1, 2] * 2, matrix[2, 2]);
+        }
+        #endregion
 
         /// <summary>
         /// Rescales the sextic.
@@ -687,7 +714,9 @@ namespace ConicSectionPlayground
         /// <param name="c">The c component of the Parabola.</param>
         /// <param name="x1">The first x position to crop the parabola.</param>
         /// <param name="x2">The second x position to crop the parabola.</param>
-        /// <returns>Returns the control point locations of a Quadric Bezier curve.</returns>
+        /// <returns>
+        /// Returns the control point locations of a Quadric Bezier curve.
+        /// </returns>
         /// <acknowledgment>
         /// https://math.stackexchange.com/a/1258196
         /// </acknowledgment>
@@ -766,7 +795,9 @@ namespace ConicSectionPlayground
         /// <param name="k">The vertical component of the vertex of the parabola.</param>
         /// <param name="left">The first x position to crop the parabola.</param>
         /// <param name="right">The second x position to crop the parabola.</param>
-        /// <returns>Returns the control point locations of a Quadric Bezier curve.</returns>
+        /// <returns>
+        /// Returns the control point locations of a Quadric Bezier curve.
+        /// </returns>
         /// <acknowledgment>
         /// https://math.stackexchange.com/a/1258196
         /// </acknowledgment>
@@ -859,7 +890,9 @@ namespace ConicSectionPlayground
         /// <param name="bY">The y-component of the handle.</param>
         /// <param name="cX">The x-component of the end point.</param>
         /// <param name="cY">The y-component of the end point.</param>
-        /// <returns>Returns Quadratic Bézier curve from a cubic curve.</returns>
+        /// <returns>
+        /// Returns Quadratic Bézier curve from a cubic curve.
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (double aX, double aY, double bX, double bY, double cX, double cY, double dX, double dY) QuadraticBezierToCubicBezier(double aX, double aY, double bX, double bY, double cX, double cY) => (aX, aY, aX + (TwoThirds * (bX - aX)), aY + (TwoThirds * (bY - aY)), cX + (TwoThirds * (bX - cX)), cY + (TwoThirds * (bY - cY)), cX, cY);
     }

@@ -10,6 +10,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 
@@ -20,11 +21,12 @@ namespace ConicSectionPlayground
     /// </summary>
     /// <seealso cref="ConicSectionPlayground.IShape" />
     [TypeConverter(typeof(ExpandableObjectConverter))]
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class Group
         : IShape
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Group"/> class.
+        /// Initializes a new instance of the <see cref="Group" /> class.
         /// </summary>
         /// <param name="shapes">The shapes.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -84,5 +86,12 @@ namespace ConicSectionPlayground
                 shape.DrawShape(gr, offset, scale);
             }
         }
+
+        /// <summary>
+        /// Gets the debugger display.
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private string GetDebuggerDisplay() => ToString();
     }
 }

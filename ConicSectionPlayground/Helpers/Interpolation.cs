@@ -110,7 +110,9 @@ namespace ConicSectionPlayground
         /// <param name="r1">The first radius of the Ellipse.</param>
         /// <param name="r2">The second radius of the Ellipse.</param>
         /// <param name="angle">Angle of rotation of Ellipse about it's center.</param>
-        /// <returns>Interpolated point at theta.</returns>
+        /// <returns>
+        /// Interpolated point at theta.
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (double X, double Y) Ellipse(double t, double cX, double cY, double r1, double r2, double angle) => Ellipse(Cos(t), Sin(t), cX, cY, r1, r2, Cos(angle), Sin(angle));
 
@@ -124,7 +126,9 @@ namespace ConicSectionPlayground
         /// <param name="r2">The second radius of the Ellipse.</param>
         /// <param name="cosAngle">Horizontal rotation transform of the Ellipse.</param>
         /// <param name="sinAngle">Vertical rotation transform of the Ellipse.</param>
-        /// <returns>Interpolated point at theta.</returns>
+        /// <returns>
+        /// Interpolated point at theta.
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (double X, double Y) Ellipse(double t, double cX, double cY, double r1, double r2, double cosAngle, double sinAngle) => Ellipse(Cos(t), Sin(t), cX, cY, r1, r2, cosAngle, sinAngle);
 
@@ -139,7 +143,9 @@ namespace ConicSectionPlayground
         /// <param name="r2">The second radius of the Ellipse.</param>
         /// <param name="cosAngle">Horizontal rotation transform of the Ellipse.</param>
         /// <param name="sinAngle">Vertical rotation transform of the Ellipse.</param>
-        /// <returns>Interpolated point at theta.</returns>
+        /// <returns>
+        /// Interpolated point at theta.
+        /// </returns>
         /// <acknowledgment>
         /// http://www.vbforums.com/showthread.php?686351-RESOLVED-Elliptical-orbit
         /// </acknowledgment>
@@ -219,7 +225,9 @@ namespace ConicSectionPlayground
         /// <param name="rX">The horizontal radius of the ellipse.</param>
         /// <param name="rY">The vertical radius of the ellipse.</param>
         /// <param name="angle">The angle of orientation of the ellipse.</param>
-        /// <returns>Returns the points of extreme for an ellipse.</returns>
+        /// <returns>
+        /// Returns the points of extreme for an ellipse.
+        /// </returns>
         /// <acknowledgment>
         /// Based roughly on the principles found at:
         /// http://stackoverflow.com/questions/87734/how-do-you-calculate-the-axis-aligned-bounding-box-of-an-ellipse
@@ -236,7 +244,9 @@ namespace ConicSectionPlayground
         /// <param name="rY">The vertical radius of the ellipse.</param>
         /// <param name="cosAngle">The cosine component of the angle of orientation of the ellipse.</param>
         /// <param name="sinAngle">The sine component of the angle of orientation of the ellipse.</param>
-        /// <returns>Returns the points of extreme for an ellipse.</returns>
+        /// <returns>
+        /// Returns the points of extreme for an ellipse.
+        /// </returns>
         /// <acknowledgment>
         /// Based roughly on the principles found at:
         /// http://stackoverflow.com/questions/87734/how-do-you-calculate-the-axis-aligned-bounding-box-of-an-ellipse

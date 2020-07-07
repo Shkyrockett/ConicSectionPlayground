@@ -27,7 +27,7 @@ namespace ConicSectionPlayground
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            using Form1 mainForm = new Form1();
+            using var mainForm = new Form1();
             Application.Run(mainForm);
         }
     }

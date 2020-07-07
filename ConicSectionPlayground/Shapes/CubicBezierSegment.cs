@@ -9,6 +9,7 @@
 // <remarks></remarks>
 
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 
@@ -17,12 +18,13 @@ namespace ConicSectionPlayground
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="ConicSectionPlayground.IShape" />
+    /// <seealso cref="IShape" />
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class CubicBezierSegment
         : IShape
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CubicBezierSegment"/> class.
+        /// Initializes a new instance of the <see cref="CubicBezierSegment" /> class.
         /// </summary>
         /// <param name="aX">a x.</param>
         /// <param name="aY">a y.</param>
@@ -35,14 +37,7 @@ namespace ConicSectionPlayground
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CubicBezierSegment(double aX, double aY, double bX, double bY, double cX, double cY, double dX, double dY)
         {
-            AX = aX;
-            AY = aY;
-            BX = bX;
-            BY = bY;
-            CX = cX;
-            CY = cY;
-            DX = dX;
-            DY = dY;
+            (AX, AY, BX, BY, CX, CY, DX, DY) = (aX, aY, bX, bY, cX, cY, dX, dY);
         }
 
         /// <summary>
@@ -164,9 +159,16 @@ namespace ConicSectionPlayground
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"{nameof(CubicBezierSegment)}({nameof(AX)}: {AX}, {nameof(AY)}: {AY}, {nameof(BX)}: {BX}, {nameof(BY)}: {BY}, {nameof(CX)}: {CX}, {nameof(CY)}: {CY}, {nameof(DX)}: {DX}, {nameof(DY)}: {DY})";
+
+        /// <summary>
+        /// Gets the debugger display.
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private string GetDebuggerDisplay() => ToString();
     }
 }

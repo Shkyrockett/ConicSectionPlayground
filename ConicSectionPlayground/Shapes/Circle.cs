@@ -9,6 +9,7 @@
 // <remarks></remarks>
 
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 
@@ -17,12 +18,13 @@ namespace ConicSectionPlayground
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="ConicSectionPlayground.IShape" />
+    /// <seealso cref="IShape" />
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class Circle
         : IShape
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Circle"/> class.
+        /// Initializes a new instance of the <see cref="Circle" /> class.
         /// </summary>
         /// <param name="h">The h.</param>
         /// <param name="k">The k.</param>
@@ -36,7 +38,7 @@ namespace ConicSectionPlayground
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Circle"/> class.
+        /// Initializes a new instance of the <see cref="Circle" /> class.
         /// </summary>
         /// <param name="tuple">The tuple.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -125,9 +127,16 @@ namespace ConicSectionPlayground
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"{nameof(Circle)}({nameof(H)}: {H}, {nameof(K)}: {K}, {nameof(R)}: {R})";
+
+        /// <summary>
+        /// Gets the debugger display.
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private string GetDebuggerDisplay() => ToString();
     }
 }

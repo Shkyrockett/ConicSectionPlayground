@@ -9,6 +9,7 @@
 // <remarks></remarks>
 
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 
@@ -17,12 +18,13 @@ namespace ConicSectionPlayground
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="ConicSectionPlayground.IShape" />
+    /// <seealso cref="IShape" />
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class Ellipse
         : IShape
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Ellipse"/> class.
+        /// Initializes a new instance of the <see cref="Ellipse" /> class.
         /// </summary>
         /// <param name="h">The h.</param>
         /// <param name="k">The k.</param>
@@ -32,15 +34,11 @@ namespace ConicSectionPlayground
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Ellipse(double h, double k, double rX, double rY, double a)
         {
-            H = h;
-            K = k;
-            RX = rX;
-            RY = rY;
-            A = a;
+            (H, K, RX, RY, A) = (h, k, rX, rY, a);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Ellipse"/> class.
+        /// Initializes a new instance of the <see cref="Ellipse" /> class.
         /// </summary>
         /// <param name="tuple">The tuple.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -137,14 +135,7 @@ namespace ConicSectionPlayground
         /// <value>
         /// The center.
         /// </value>
-        public PointF Center
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return new PointF((float)((0.5d * (RX * 2d)) + H), (float)((0.5d * (RY * 2d)) + K));
-            }
-        }
+        public PointF Center { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => new PointF((float)((0.5d * (RX * 2d)) + H), (float)((0.5d * (RY * 2d)) + K)); }
 
         ///// <summary>
         ///// Gets the unit conic section.
@@ -205,9 +196,16 @@ namespace ConicSectionPlayground
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"{nameof(Ellipse)}({nameof(H)}: {H}, {nameof(K)}: {K}, {nameof(RX)}: {RX}, {nameof(RY)}: {RY}, {nameof(A)}: {A})";
+
+        /// <summary>
+        /// Gets the debugger display.
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private string GetDebuggerDisplay() => ToString();
     }
 }

@@ -9,6 +9,7 @@
 // <remarks></remarks>
 
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 
@@ -17,12 +18,13 @@ namespace ConicSectionPlayground
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="ConicSectionPlayground.IShape" />
+    /// <seealso cref="IShape" />
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class Line
         : IShape
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Line"/> class.
+        /// Initializes a new instance of the <see cref="Line" /> class.
         /// </summary>
         /// <param name="x">a x.</param>
         /// <param name="y">a y.</param>
@@ -31,10 +33,7 @@ namespace ConicSectionPlayground
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Line(double x, double y, double i, double j)
         {
-            X = x;
-            Y = y;
-            I = i;
-            J = j;
+            (X, Y, I, J) = (x, y, i, j);
         }
 
         /// <summary>
@@ -128,9 +127,16 @@ namespace ConicSectionPlayground
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"{nameof(Line)}({nameof(X)}: {X}, {nameof(Y)}: {Y}, {nameof(I)}: {I}, {nameof(J)}: {J})";
+
+        /// <summary>
+        /// Gets the debugger display.
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private string GetDebuggerDisplay() => ToString();
     }
 }

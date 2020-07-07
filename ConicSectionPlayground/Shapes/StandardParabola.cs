@@ -9,6 +9,7 @@
 // <remarks></remarks>
 
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 
@@ -17,12 +18,13 @@ namespace ConicSectionPlayground
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="ConicSectionPlayground.IShape" />
+    /// <seealso cref="IShape" />
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class StandardParabola
         : IShape
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="StandardParabola"/> class.
+        /// Initializes a new instance of the <see cref="StandardParabola" /> class.
         /// </summary>
         /// <param name="a">a.</param>
         /// <param name="b">The b.</param>
@@ -31,14 +33,11 @@ namespace ConicSectionPlayground
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public StandardParabola(double a, double b, double c, double i = 0d)
         {
-            A = a;
-            B = b;
-            C = c;
-            I = i;
+            (A, B, C, I) = (a, b, c, i);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StandardParabola"/> class.
+        /// Initializes a new instance of the <see cref="StandardParabola" /> class.
         /// </summary>
         /// <param name="tuple">The tuple.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -47,7 +46,7 @@ namespace ConicSectionPlayground
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StandardParabola"/> class.
+        /// Initializes a new instance of the <see cref="StandardParabola" /> class.
         /// </summary>
         /// <param name="tuple">The tuple.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -56,10 +55,10 @@ namespace ConicSectionPlayground
         { }
 
         /// <summary>
-        /// Gets or sets a.
+        /// Gets or sets the a.
         /// </summary>
         /// <value>
-        /// a.
+        /// The a.
         /// </value>
         public double A { get; set; }
 
@@ -182,9 +181,16 @@ namespace ConicSectionPlayground
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"{nameof(StandardParabola)}({nameof(A)}: {A}, {nameof(B)}: {B}, {nameof(C)}: {C}, {nameof(I)}: {I})";
+
+        /// <summary>
+        /// Gets the debugger display.
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private string GetDebuggerDisplay() => ToString();
     }
 }

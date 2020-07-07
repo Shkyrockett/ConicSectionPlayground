@@ -9,6 +9,7 @@
 // <remarks></remarks>
 
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 
@@ -17,12 +18,13 @@ namespace ConicSectionPlayground
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="ConicSectionPlayground.IShape" />
+    /// <seealso cref="IShape" />
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class ConicSection
         : IShape
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConicSection"/> class.
+        /// Initializes a new instance of the <see cref="ConicSection" /> class.
         /// </summary>
         /// <param name="a">a.</param>
         /// <param name="b">The b.</param>
@@ -33,16 +35,11 @@ namespace ConicSectionPlayground
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ConicSection(double a, double b, double c, double d, double e, double f)
         {
-            A = a;
-            B = b;
-            C = c;
-            D = d;
-            E = e;
-            F = f;
+            (A, B, C, D, E, F) = (a, b, c, d, e, f);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConicSection"/> class.
+        /// Initializes a new instance of the <see cref="ConicSection" /> class.
         /// </summary>
         /// <param name="tuple">The p.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -63,10 +60,10 @@ namespace ConicSectionPlayground
         public void Deconstruct(out double a, out double b, out double c, out double d, out double e, out double f) => (a, b, c, d, e, f) = (A, B, C, D, E, F);
 
         /// <summary>
-        /// Gets or sets a.
+        /// Gets or sets the a.
         /// </summary>
         /// <value>
-        /// a.
+        /// The a.
         /// </value>
         public double A { get; set; }
 
@@ -159,9 +156,16 @@ namespace ConicSectionPlayground
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"{nameof(ConicSection)}({nameof(A)}: {A}, {nameof(B)}: {B}, {nameof(C)}: {C}, {nameof(D)}: {D}, {nameof(E)}: {E}, {nameof(F)}: {F})";
+
+        /// <summary>
+        /// Gets the debugger display.
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private string GetDebuggerDisplay() => ToString();
     }
 }

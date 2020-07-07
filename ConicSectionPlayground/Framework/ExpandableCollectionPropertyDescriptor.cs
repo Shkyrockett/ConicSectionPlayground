@@ -18,6 +18,7 @@ namespace ConicSectionPlayground
     /// <summary>
     /// The expandable collection property descriptor class.
     /// </summary>
+    /// <seealso cref="System.ComponentModel.PropertyDescriptor" />
     /// <acknowledgment>
     /// http://stackoverflow.com/questions/32582504/propertygrid-expandable-collection
     /// </acknowledgment>
@@ -38,7 +39,7 @@ namespace ConicSectionPlayground
 
         #region Events
         /// <summary>
-        /// The refresh required event of the <see cref="EventHandler"/>.
+        /// The refresh required event of the <see cref="EventHandler" />.
         /// </summary>
         internal event EventHandler RefreshRequired;
         #endregion Events
@@ -64,12 +65,12 @@ namespace ConicSectionPlayground
         public override string Name => index.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
-        /// Gets a value indicating whether 
+        /// Gets a value indicating whether
         /// </summary>
         public override bool IsReadOnly => false;
 
         /// <summary>
-        /// Gets a value indicating whether 
+        /// Gets a value indicating whether
         /// </summary>
         public override bool SupportsChangeEvents => true;
 
@@ -94,7 +95,9 @@ namespace ConicSectionPlayground
         /// The can reset value.
         /// </summary>
         /// <param name="component">The component.</param>
-        /// <returns>The <see cref="bool"/>.</returns>
+        /// <returns>
+        /// The <see cref="bool" />.
+        /// </returns>
         public override bool CanResetValue(object component) => true;
 
         /// <summary>
@@ -107,7 +110,9 @@ namespace ConicSectionPlayground
         /// Get the value.
         /// </summary>
         /// <param name="component">The component.</param>
-        /// <returns>The <see cref="object"/>.</returns>
+        /// <returns>
+        /// The <see cref="object" />.
+        /// </returns>
         public override object GetValue(object component)
         {
             OnRefreshRequired();
@@ -125,7 +130,9 @@ namespace ConicSectionPlayground
         /// The should serialize value.
         /// </summary>
         /// <param name="component">The component.</param>
-        /// <returns>The <see cref="bool"/>.</returns>
+        /// <returns>
+        /// The <see cref="bool" />.
+        /// </returns>
         public override bool ShouldSerializeValue(object component) => true;
 
         /// <summary>
@@ -133,7 +140,9 @@ namespace ConicSectionPlayground
         /// </summary>
         /// <param name="list">The list.</param>
         /// <param name="index">The index.</param>
-        /// <returns>The <see cref="string"/>.</returns>
+        /// <returns>
+        /// The <see cref="string" />.
+        /// </returns>
         private static string GetDisplayName(IList list, int index)
         {
             _ = list;

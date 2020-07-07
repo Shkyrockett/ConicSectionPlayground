@@ -9,6 +9,7 @@
 // <remarks></remarks>
 
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 
@@ -17,12 +18,13 @@ namespace ConicSectionPlayground
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="ConicSectionPlayground.IShape" />
+    /// <seealso cref="IShape" />
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class VertexParabola
         : IShape
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="VertexParabola"/> class.
+        /// Initializes a new instance of the <see cref="VertexParabola" /> class.
         /// </summary>
         /// <param name="a">a.</param>
         /// <param name="h">The h.</param>
@@ -31,14 +33,11 @@ namespace ConicSectionPlayground
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public VertexParabola(double a, double h, double k, double i = 0)
         {
-            A = a;
-            H = h;
-            K = k;
-            I = i;
+            (A, H, K, I) = (a, h, k, i);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="VertexParabola"/> class.
+        /// Initializes a new instance of the <see cref="VertexParabola" /> class.
         /// </summary>
         /// <param name="tuple">The tuple.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -47,7 +46,7 @@ namespace ConicSectionPlayground
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="VertexParabola"/> class.
+        /// Initializes a new instance of the <see cref="VertexParabola" /> class.
         /// </summary>
         /// <param name="tuple">The tuple.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -56,10 +55,10 @@ namespace ConicSectionPlayground
         { }
 
         /// <summary>
-        /// Gets or sets a.
+        /// Gets or sets the a.
         /// </summary>
         /// <value>
-        /// a.
+        /// The a.
         /// </value>
         public double A { get; set; }
 
@@ -182,9 +181,16 @@ namespace ConicSectionPlayground
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => $"{nameof(VertexParabola)}({nameof(A)}: {A}, {nameof(H)}: {H}, {nameof(K)}: {K}, {nameof(I)}: {I})";
+
+        /// <summary>
+        /// Gets the debugger display.
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private string GetDebuggerDisplay() => ToString();
     }
 }

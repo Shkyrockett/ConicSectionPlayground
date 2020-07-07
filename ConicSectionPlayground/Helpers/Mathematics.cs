@@ -47,13 +47,17 @@ namespace ConicSectionPlayground
         /// <summary>
         /// One Radian.
         /// </summary>
-        /// <remarks><para>PI / 180</para></remarks>
+        /// <remarks>
+        /// PI / 180
+        /// </remarks>
         public const double Radian = PI / 180d; // 0.01745329251994329576923690768489d;
 
         /// <summary>
         /// One degree.
         /// </summary>
-        /// <remarks><para>180 / PI</para></remarks>
+        /// <remarks>
+        /// 180 / PI
+        /// </remarks>
         public const double Degree = 180d / PI; // 57.295779513082320876798154814105d;
 
         /// <summary>
@@ -99,7 +103,9 @@ namespace ConicSectionPlayground
         /// <param name="point1Y">The point1Y.</param>
         /// <param name="point2X">The point2X.</param>
         /// <param name="point2Y">The point2Y.</param>
-        /// <returns>The <see cref="ValueTuple{T1, T2}"/>.</returns>
+        /// <returns>
+        /// The <see cref="ValueTuple{T1, T2}" />.
+        /// </returns>
         /// <acknowledgment>
         /// http://www.kevlindev.com/
         /// </acknowledgment>
@@ -115,7 +121,9 @@ namespace ConicSectionPlayground
         /// <param name="point1Y">The point1Y.</param>
         /// <param name="point2X">The point2X.</param>
         /// <param name="point2Y">The point2Y.</param>
-        /// <returns>The <see cref="ValueTuple{T1, T2}"/>.</returns>
+        /// <returns>
+        /// The <see cref="ValueTuple{T1, T2}" />.
+        /// </returns>
         /// <acknowledgment>
         /// http://www.kevlindev.com/
         /// </acknowledgment>

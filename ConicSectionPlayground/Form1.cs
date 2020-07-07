@@ -55,7 +55,7 @@ namespace ConicSectionPlayground
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// Initializes a new instance of the <see cref="Form1" /> class.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Form1()
@@ -113,18 +113,16 @@ namespace ConicSectionPlayground
         /// Handles the Load event of the Form1 control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+        { }
 
         /// <summary>
         /// Handles the Paint event of the PicCanvas control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="PaintEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="PaintEventArgs" /> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void PicCanvas_Paint(object sender, PaintEventArgs e)
         {
@@ -141,7 +139,7 @@ namespace ConicSectionPlayground
         /// Handles the MouseDown event of the Form1 control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void PicCanvas_MouseDown(object sender, MouseEventArgs e)
         {
@@ -158,7 +156,7 @@ namespace ConicSectionPlayground
         /// Handles the MouseMove event of the Form1 control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void PicCanvas_MouseMove(object sender, MouseEventArgs e)
         {
@@ -176,7 +174,7 @@ namespace ConicSectionPlayground
         /// Handles the MouseUp event of the Form1 control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void PicCanvas_MouseUp(object sender, MouseEventArgs e)
         {
@@ -191,7 +189,7 @@ namespace ConicSectionPlayground
         /// Handles the MouseWheel event of the Form1 control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="MouseEventArgs" /> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void PicCanvas_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -205,7 +203,7 @@ namespace ConicSectionPlayground
         /// Handles the Resize event of the PicCanvas control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void PicCanvas_Resize(object sender, EventArgs e)
         {
@@ -217,7 +215,7 @@ namespace ConicSectionPlayground
         /// Handles the PropertyValueChanged event of the PropertyGrid1 control.
         /// </summary>
         /// <param name="s">The source of the event.</param>
-        /// <param name="e">The <see cref="PropertyValueChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="PropertyValueChangedEventArgs" /> instance containing the event data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void PropertyGrid1_PropertyValueChanged(object s, PropertyValueChangedEventArgs e) => picCanvas.Invalidate();
         #endregion
