@@ -1,3 +1,5 @@
 # ConicSectionPlayground
 
-This is an experiment investigating Conic Sections in c# .NET 5 Windows Forms.
+This is an experiment investigating Conic Sections using c# .NET 5 Windows Forms.
+
+![Screen shot](screenshot.png)
