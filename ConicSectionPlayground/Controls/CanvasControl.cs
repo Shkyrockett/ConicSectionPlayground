@@ -118,12 +118,20 @@ namespace ConicSectionPlayground
         private int HandleRadiusSquared => HandleRadius * HandleRadius;
 
         /// <summary>
+        /// Gets or sets the group.
+        /// </summary>
+        /// <value>
+        /// The group.
+        /// </value>
+        public Group Document { get => group; set => group = value; }
+
+        /// <summary>
         /// Gets or sets the pan point.
         /// </summary>
         /// <value>
         /// The pan point.
         /// </value>
-        public PointF PanPoint
+        public PointF Pan
         {
             get => panPoint; set
             {
@@ -138,7 +146,7 @@ namespace ConicSectionPlayground
         /// <value>
         /// The scale.
         /// </value>
-        public new float Scale
+        public float Zoom
         {
             get => scale; set
             {
@@ -146,14 +154,6 @@ namespace ConicSectionPlayground
                 Invalidate();
             }
         }
-
-        /// <summary>
-        /// Gets or sets the group.
-        /// </summary>
-        /// <value>
-        /// The group.
-        /// </value>
-        public Group Group { get => group; set => group = value; }
         #endregion
 
         #region Event Handlers

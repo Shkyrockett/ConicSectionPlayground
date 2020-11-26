@@ -195,6 +195,7 @@ namespace ConicSectionPlayground
             this.ClientSize = new System.Drawing.Size(933, 519);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Conic Sections";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -207,6 +208,7 @@ namespace ConicSectionPlayground
             this.splitContainer2.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
         #endregion
     }

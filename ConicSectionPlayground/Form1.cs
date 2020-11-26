@@ -59,7 +59,7 @@ namespace ConicSectionPlayground
             conicSection4.Pen = Pens.MediumTurquoise;
             conicSection4.Name = "Parabola Conic Section";
 
-            canvasControl.Group = new Group(new List<IGeometry> {
+            canvasControl.Document = new Group(new List<IGeometry> {
                 ellipse1,
                 conicSection,
                 conicSection1,
@@ -74,7 +74,7 @@ namespace ConicSectionPlayground
             //var t1 = Conversion.EllipseToUnitConicSection(ellipse.a, ellipse.b, ellipse.h, ellipse.k, Math.Cos(ellipse.angle), Math.Sin(ellipse.angle));
             //var t2 = Conversion.EllipseConicSectionPolynomial(ellipse.h, ellipse.k, ellipse.a, ellipse.b, Math.Cos(ellipse.angle), Math.Sin(ellipse.angle));
 
-            propertyGrid1.SelectedObject = canvasControl.Group;
+            propertyGrid1.SelectedObject = canvasControl.Document;
             propertyGrid1.ExpandAllGridItems();
         }
         #endregion
@@ -105,7 +105,7 @@ namespace ConicSectionPlayground
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void ButtonResetPan_Click(object sender, EventArgs e)
         {
-            canvasControl.PanPoint = new PointF(0f, 0f);
+            canvasControl.Pan = new PointF(0f, 0f);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace ConicSectionPlayground
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void ButtonResetScale_Click(object sender, EventArgs e)
         {
-            canvasControl.Scale = 1;
+            canvasControl.Zoom = 1;
         }
         #endregion
     }
