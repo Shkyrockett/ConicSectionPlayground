@@ -138,8 +138,20 @@ namespace ConicSectionLibrary
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Translates the specified delta.
+        /// </summary>
+        /// <param name="delta">The delta.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public IGeometry Translate(Vector2 delta) => throw new NotImplementedException();
 
+        /// <summary>
+        /// Queries whether the shape includes the specified point in it's geometry.
+        /// </summary>
+        /// <param name="point">The point.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public bool Includes(PointF point) => throw new NotImplementedException();
 
         /// <summary>
@@ -149,6 +161,14 @@ namespace ConicSectionLibrary
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OnPropertyChanged([CallerMemberName] string name = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <param name="format">The format.</param>
+        /// <param name="formatProvider">The format provider.</param>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public string ToString(string format, IFormatProvider formatProvider) => ToString();
 
         /// <summary>

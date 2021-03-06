@@ -177,9 +177,19 @@ namespace ConicSectionLibrary
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ConicSection ToUnitConicSection() => ConversionD.EllipseToUnitConicSection(RX, RY, H, K, A);
-        
+
+        /// <summary>
+        /// Translates the specified delta.
+        /// </summary>
+        /// <param name="delta">The delta.</param>
+        /// <returns></returns>
         public IGeometry Translate(Vector2 delta) => throw new NotImplementedException();
-        
+
+        /// <summary>
+        /// Includeses the specified point.
+        /// </summary>
+        /// <param name="point">The point.</param>
+        /// <returns></returns>
         public bool Includes(PointF point) => throw new NotImplementedException();
 
         /// <summary>
@@ -189,6 +199,12 @@ namespace ConicSectionLibrary
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ConicSection ToConicSection() => ConversionD.EllipseToConicSection(RX, RY, H, K, A);
 
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <param name="format">The format.</param>
+        /// <param name="formatProvider">The format provider.</param>
+        /// <returns></returns>
         public string ToString(string format, IFormatProvider formatProvider) => ToString();
         
         /// <summary>

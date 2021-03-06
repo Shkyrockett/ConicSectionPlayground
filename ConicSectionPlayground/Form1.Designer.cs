@@ -101,12 +101,9 @@ namespace ConicSectionPlayground
             this.canvasControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.canvasControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvasControl.GhostPolygonPen = null;
-            this.canvasControl.Group = null;
             this.canvasControl.HandleRadius = 0;
             this.canvasControl.Location = new System.Drawing.Point(0, 0);
             this.canvasControl.Name = "canvasControl";
-            this.canvasControl.PanPoint = ((System.Drawing.PointF)(resources.GetObject("canvasControl.PanPoint")));
-            this.canvasControl.Scale = 1F;
             this.canvasControl.Size = new System.Drawing.Size(740, 495);
             this.canvasControl.TabIndex = 0;
             this.canvasControl.TabStop = false;
