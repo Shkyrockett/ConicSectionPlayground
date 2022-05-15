@@ -1,5 +1,5 @@
-﻿// <copyright file="PolynomialsF.cs">
-//     Copyright © 2019 - 2020 Shkyrockett. All rights reserved.
+﻿// <copyright file="PolynomialsD.cs">
+//     Copyright © 2019 - 2022 Shkyrockett. All rights reserved.
 // </copyright>
 // <author id="shkyrockett">Shkyrockett</author>
 // <license>
@@ -8,12 +8,11 @@
 // <summary></summary>
 // <remarks></remarks>
 
-namespace ConicSectionLibrary
+namespace ConicSectionLibrary;
+
+/// <summary>
+/// 
+/// </summary>
+public static partial class Polynomials
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public static class PolynomialsF
-    {
-    }
 }

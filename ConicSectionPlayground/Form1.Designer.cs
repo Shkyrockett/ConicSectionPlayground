@@ -1,5 +1,5 @@
 ﻿// <copyright file="Form1.Designer.cs">
-//     Copyright © 2019 - 2020 Shkyrockett. All rights reserved.
+//     Copyright © 2019 - 2022 Shkyrockett. All rights reserved.
 // </copyright>
 // <author id="shkyrockett">Shkyrockett</author>
 // <license>
@@ -8,75 +8,75 @@
 // <summary></summary>
 // <remarks></remarks>
 
-namespace ConicSectionPlayground
+namespace ConicSectionPlayground;
+
+/// <summary>
+/// 
+/// </summary>
+/// <seealso cref="System.Windows.Forms.Form" />
+partial class Form1
 {
     /// <summary>
-    /// 
+    /// Required designer variable.
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.Form" />
-    partial class Form1
+    private System.ComponentModel.IContainer components = null;
+
+    /// <summary>
+    /// The canvas.
+    /// </summary>
+    private CanvasControl canvasControl;
+
+    /// <summary>
+    /// The property grid1
+    /// </summary>
+    private System.Windows.Forms.PropertyGrid propertyGrid1;
+
+    /// <summary>
+    /// The split container1
+    /// </summary>
+    private System.Windows.Forms.SplitContainer splitContainer1;
+
+    /// <summary>
+    /// The split container2
+    /// </summary>
+    private System.Windows.Forms.SplitContainer splitContainer2;
+
+    /// <summary>
+    /// The flow layout panel1
+    /// </summary>
+    private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+
+    /// <summary>
+    /// The reset pan button
+    /// </summary>
+    private System.Windows.Forms.Button buttonResetPan;
+
+    /// <summary>
+    /// The reset scale button
+    /// </summary>
+    private System.Windows.Forms.Button buttonResetScale;
+
+    /// <summary>
+    /// Clean up any resources being used.
+    /// </summary>
+    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    protected override void Dispose(bool disposing)
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// The canvas.
-        /// </summary>
-        private CanvasControl canvasControl;
-
-        /// <summary>
-        /// The property grid1
-        /// </summary>
-        private System.Windows.Forms.PropertyGrid propertyGrid1;
-
-        /// <summary>
-        /// The split container1
-        /// </summary>
-        private System.Windows.Forms.SplitContainer splitContainer1;
-
-        /// <summary>
-        /// The split container2
-        /// </summary>
-        private System.Windows.Forms.SplitContainer splitContainer2;
-
-        /// <summary>
-        /// The flow layout panel1
-        /// </summary>
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-
-        /// <summary>
-        /// The reset pan button
-        /// </summary>
-        private System.Windows.Forms.Button buttonResetPan;
-
-        /// <summary>
-        /// The reset scale button
-        /// </summary>
-        private System.Windows.Forms.Button buttonResetScale;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        if (disposing && (components is not null))
         {
-            if (disposing && (components is not null))
-            {
-                components.Dispose();
-            }
-
-            base.Dispose(disposing);
+            components.Dispose();
         }
 
-        #region Windows Form Designer generated code
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+        base.Dispose(disposing);
+    }
+
+    #region Windows Form Designer generated code
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent()
+    {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.canvasControl = new ConicSectionPlayground.CanvasControl();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
@@ -100,20 +100,23 @@ namespace ConicSectionPlayground
             // 
             this.canvasControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.canvasControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvasControl.Document = null;
             this.canvasControl.GhostPolygonPen = null;
             this.canvasControl.HandleRadius = 0;
             this.canvasControl.Location = new System.Drawing.Point(0, 0);
             this.canvasControl.Name = "canvasControl";
+            this.canvasControl.Pan = ((System.Drawing.PointF)(resources.GetObject("canvasControl.Pan")));
             this.canvasControl.Size = new System.Drawing.Size(740, 495);
             this.canvasControl.TabIndex = 0;
             this.canvasControl.TabStop = false;
+            this.canvasControl.Zoom = 1F;
             // 
             // propertyGrid1
             // 
             this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
             this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(165, 399);
+            this.propertyGrid1.Size = new System.Drawing.Size(165, 462);
             this.propertyGrid1.TabIndex = 1;
             this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.PropertyGrid1_PropertyValueChanged);
             // 
@@ -139,6 +142,7 @@ namespace ConicSectionPlayground
             // 
             // splitContainer2
             // 
+            this.splitContainer2.Cursor = System.Windows.Forms.Cursors.HSplit;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
@@ -152,7 +156,7 @@ namespace ConicSectionPlayground
             // 
             this.splitContainer2.Panel2.Controls.Add(this.propertyGrid1);
             this.splitContainer2.Size = new System.Drawing.Size(165, 495);
-            this.splitContainer2.SplitterDistance = 92;
+            this.splitContainer2.SplitterDistance = 29;
             this.splitContainer2.TabIndex = 2;
             // 
             // flowLayoutPanel1
@@ -162,7 +166,7 @@ namespace ConicSectionPlayground
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(165, 92);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(165, 29);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // buttonResetPan
@@ -206,8 +210,7 @@ namespace ConicSectionPlayground
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
-        }
-        #endregion
     }
+    #endregion
 }
 

@@ -1,5 +1,5 @@
 // <copyright file="Program.cs">
-//     Copyright © 2019 - 2020 Shkyrockett. All rights reserved.
+//     Copyright © 2019 - 2022 Shkyrockett. All rights reserved.
 // </copyright>
 // <author id="shkyrockett">Shkyrockett</author>
 // <license>
@@ -8,32 +8,26 @@
 // <summary></summary>
 // <remarks></remarks>
 
-using System;
 using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
 
-namespace ConicSectionPlayground
+namespace ConicSectionPlayground;
+
+/// <summary>
+/// The program class.
+/// </summary>
+internal static class Program
 {
     /// <summary>
-    /// The program class.
+    /// The main entry point for the application.
     /// </summary>
-    internal static class Program
+    [STAThread]
+    private static void Main()
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        private static void Main()
-        {
-            TypeDescriptor.AddAttributes(typeof(PointF), new TypeConverterAttribute(typeof(ExpandableObjectConverter)));
-            TypeDescriptor.AddAttributes(typeof(PointF), new SerializableAttribute());
-            
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            using var mainForm = new Form1();
-            Application.Run(mainForm);
-        }
+        TypeDescriptor.AddAttributes(typeof(PointF), new TypeConverterAttribute(typeof(ExpandableObjectConverter)));
+        TypeDescriptor.AddAttributes(typeof(PointF), new SerializableAttribute());
+
+        ApplicationConfiguration.Initialize();
+        using var mainForm = new Form1();
+        Application.Run(mainForm);
     }
 }
